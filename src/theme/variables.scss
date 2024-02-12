@@ -1,0 +1,75 @@
+:root {
+  /* Primary */
+  --VIBRANT_BLUE: #00c6ee;
+  --WHITE: #ffffff;
+  --BLACK: #000000;
+  --WARNING: #f1c40f;
+  --ERROR: #e74c3c;
+
+  /* Secondary */
+  --BLUE: #3b7fa5;
+  --BLUE_CERULEAN: #12abdb;
+  --LIGHT_SKY_BLUE: #87CEFA;
+  --BLUE_GREEN: #0f6a73;
+  --GREEN: #52c8b4;
+  --RED: #DC143C;
+  --RED_VIOLET: #a12980;
+  --SUCCESS: #07bc0c;
+  --INFO: #3498db;
+
+  /* Grayscale */
+  --GREY: #e5e5e5;
+  --GREY_0: #f0f0f0;
+  --GREY_1: #f4f4f4;
+  --GREY_2: #dbdbdb;
+  --GREY_3: #e7e7e7;
+  --GREY_4: #f6f6f6;
+  --GREY_5: #f0f1f3;
+  --GREY_6: #dedede;
+  --GREY_7: #757575;
+  --GREY_8: #15161e;
+  --GREY_9: #9e9e9e;
+  --GREY_10: #212121;
+  --GREY_11: #e0e0e0;
+  --GREY_12: #999999;
+  --BLACK_GREY: #333333;
+
+  /* Typography - START */
+  // Font
+
+  // Font size
+  --font-size-xxxxs: 8px;
+  --font-size-xxxs: 10px;
+  --font-size-xxs: 12px;
+  --font-size-xs: 13px;
+  --font-size-s: 14px;
+  --font-size-m: 16px;
+  --font-size-l: 18px;
+  --font-size-xl: 24px;
+  --font-size-xxl: 32px;
+  --font-size-xxxl: 40px;
+  --font-size-extra: 70px;
+  --font-size-h1: 40px;
+  --font-size-h2: 34px;
+  --font-size-h3: 24px;
+  --font-size-h4: 20px;
+
+  // Line height
+  --line-height-text-s: 14px;
+  --line-height-text-m: 16px;
+  --line-height-text-l: 20px;
+  --line-height-text-xl: 24px;
+  --line-height-text-xxl: 32px;
+  --line-height-text-xxxl: 48px;
+
+  // Letter spacing
+
+  // Font weight
+  --font-weight-thin: 100;
+  --font-weight-light: 200;
+  --font-weight-normal: 400;
+  --font-weight-normal-500: 500;
+  --font-weight-normal-600: 600;
+  --font-weight-bold: 700;
+  /* Typography - END */
+}

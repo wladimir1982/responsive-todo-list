@@ -1,0 +1,41 @@
+@import 'src/theme/variables';
+
+.container {
+  padding: 120px 15px 50px;
+}
+
+.topContent {
+  height: 72px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 50px;
+  background-color: var(--GREY_11);
+
+  @media (max-width: 940px) {
+    height: auto;
+    flex-direction: column;
+  }
+}
+
+.todoList {
+  height: 310px;
+  padding-left: 0;
+}
+
+.messageForEmptyTodos {
+  &:global(.MuiTypography-root) {
+    color: var(--WHITE);
+    background-color: var(--GREY_10);
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: var(--font-size-xxl);
+
+    @media (max-width: 480px) {
+      font-size: var(--font-size-xl);
+    }
+  }
+}

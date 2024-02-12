@@ -1,0 +1,13 @@
+@import 'src/theme/variables';
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+
+  @media (max-width: 940px) {
+    width: 100%;
+    flex-direction: column;
+  }
+}

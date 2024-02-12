@@ -1,0 +1,31 @@
+@import 'src/theme/variables';
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+  border-radius: 10px;
+  padding: 5px 10px;
+  color: var(--WHITE);
+  background-color: var(--GREY_7);
+}
+
+.containerBg {
+  background-color: var(--BLUE_GREEN);
+}
+
+.nameBlock {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nameBlockCompleted {
+  text-decoration: line-through;
+}
+
+.actionsBlock {
+  display: flex;
+  gap: 5px;
+}
