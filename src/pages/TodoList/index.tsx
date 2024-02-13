@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { markAllCompleted, onChangeCurrentPage, updateTodoOrder } from 'store/reducers/Todos';
+import {
+  filterTodosByStatus,
+  markAllCompleted,
+  onChangeCurrentPage,
+  updateSearchByName,
+  updateTodoOrder
+} from 'store/reducers/Todos';
 
 import AddOrEditTodoModal from 'components/AddOrEditTodoModal';
 import FilterTodos from 'components/FilterTodos';
@@ -18,8 +24,8 @@ import styles from './TodoList.module.scss';
 import theme from 'theme/teme';
 
 const TodoList: React.FC = () => {
-  const [openAddOrEditTodoModal, setOpenAddOrEditTodoModal] = useState(false);
-  const [openRemoveTodoModal, setOpenRemoveTodoModal] = useState(false);
+  const [openAddOrEditTodoModal, setOpenAddOrEditTodoModal] = useState<boolean>(false);
+  const [openRemoveTodoModal, setOpenRemoveTodoModal] = useState<boolean>(false);
   const [selectedTodo, setSelectedTodo] = useState<ITodo | undefined>(undefined);
   const { currentPage, searchByName, statusTodo, todos, todosPerPage } = useAppSelector(
     state => state.todosReducer
@@ -27,28 +33,34 @@ const TodoList: React.FC = () => {
   const fullScreen: boolean = useMediaQuery(theme.breakpoints.down(940));
   const dispatch = useDispatch();
 
-  const filteredTodos = todos.filter((todo: ITodo) => {
-    const matchesStatusTodo =
+  const filteredTodos: ITodo[] = todos.filter((todo: ITodo) => {
+    const matchesStatusTodo: boolean =
       (statusTodo === todoStatusOptions[1].value && todo.completed) ||
       (statusTodo === todoStatusOptions[2].value && !todo.completed) ||
       statusTodo === todoStatusOptions[0].value;
 
-    const matchesSearchByName = todo.name.toLowerCase().includes(searchByName.toLowerCase());
+    const matchesSearchByName: boolean = todo.name
+      .toLowerCase()
+      .includes(searchByName.toLowerCase());
 
     return matchesStatusTodo && matchesSearchByName;
   });
 
-  const totalPages = Math.ceil(filteredTodos.length / todosPerPage);
+  const totalPages: number = Math.ceil(filteredTodos.length / todosPerPage);
 
-  const startIndex = (currentPage - 1) * todosPerPage;
-  const endIndex = startIndex + todosPerPage;
-  const todosToDisplay = filteredTodos.slice(startIndex, endIndex);
+  const startIndex: number = (currentPage - 1) * todosPerPage;
+  const endIndex: number = startIndex + todosPerPage;
+  const todosToDisplay: ITodo[] = filteredTodos.slice(startIndex, endIndex);
 
   useEffect(() => {
     if (filteredTodos.length && !todosToDisplay.length && totalPages < currentPage) {
       dispatch(onChangeCurrentPage(totalPages < 1 ? 1 : totalPages));
     }
-  }, [todosToDisplay, filteredTodos, totalPages]);
+    if (todos.length === 1 && statusTodo !== todoStatusOptions[0].value) {
+      dispatch(filterTodosByStatus(todoStatusOptions[0].value));
+      dispatch(updateSearchByName(''));
+    }
+  }, [todos, todosToDisplay, filteredTodos, totalPages]);
 
   const markAllTodosCompleted = () => {
     dispatch(markAllCompleted());
@@ -89,11 +101,19 @@ const TodoList: React.FC = () => {
   const handleDragEnd = (result: DropResult) => {
     if (!result.destination) return;
 
-    const items = Array.from(todos);
-    const [reorderedItem] = items.splice(result.source.index + startIndex, 1);
-    items.splice(result.destination.index + startIndex, 0, reorderedItem);
+    const items: ITodo[] = Array.from(todosToDisplay);
+    const [reorderedItem] = items.splice(result.source.index, 1);
+    items.splice(result.destination.index, 0, reorderedItem);
 
-    dispatch(updateTodoOrder(items as ITodo[]));
+    const updatedTodos: ITodo[] = [...todos];
+
+    // Update the order only for elements on the current page
+    for (let i: number = startIndex; i < endIndex && i < updatedTodos.length; i++) {
+      const indexInOriginal = todos.indexOf(todosToDisplay[i - startIndex]);
+      updatedTodos[indexInOriginal] = items[i - startIndex];
+    }
+
+    dispatch(updateTodoOrder(updatedTodos));
   };
 
   const renderTodoItem = (todo: ITodo, index: number) => (
