@@ -89,7 +89,7 @@ const TodoList: React.FC = () => {
   const handleDragEnd = (result: DropResult) => {
     if (!result.destination) return;
 
-    const items = Array.from(filteredTodos);
+    const items = Array.from(todos);
     const [reorderedItem] = items.splice(result.source.index + startIndex, 1);
     items.splice(result.destination.index + startIndex, 0, reorderedItem);
 
