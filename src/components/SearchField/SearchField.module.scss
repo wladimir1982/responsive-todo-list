@@ -1,0 +1,19 @@
+@import 'src/theme/variables';
+
+.textFieldInput {
+  &:global(.MuiInputBase-root.MuiOutlinedInput-root) {
+    border-radius: 20px;
+    padding-right: 8px;
+
+    input:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 1000px var(--WHITE) inset;
+    }
+  }
+}
+
+.searchIcon {
+  &:global(.MuiIconButton-root) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

@@ -1,0 +1,44 @@
+@import 'src/theme/variables';
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 120px 0 50px;
+
+  @media (max-width: 530px) {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+.content {
+  max-width: 500px;
+  min-width: 270px;
+  color: var(--WHITE);
+  background-color: var(--GREY_10);
+  border-radius: 10px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.name {
+  &:global(.MuiTypography-root) {
+    font-size: var(--font-size-h1);
+    word-break: break-all;
+  }
+}
+
+.text {
+  &:global(.MuiTypography-root) {
+    font-size: var(--font-size-xl);
+    word-break: break-all;
+  }
+}
+
+.span {
+  color: var(--RED);
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-normal-600);
+}
